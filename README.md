@@ -1,6 +1,5 @@
 # newhouse.
 <p>Jest to projekt prostej aplikacji, do zarządzania ogłoszeniami nieruchomości </p>
-<br>
 <p>W przykładowej bazie danych jest gotowy utworzony administrator (panel administracyjny pod /admin)</p>
 Login: admin<br>
 Hasło: admin
