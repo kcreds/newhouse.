@@ -1,0 +1,91 @@
+.navbar-brand
+{
+    color:black !important;
+}
+.nav-link
+{
+    color:black !important;
+}
+.cont
+{
+    margin: 5em;
+    margin-top: 10em;
+}
+.addbtn
+{
+    text-align: right;
+    float: right;
+}
+.alert{
+    float: right;
+}
+.alert-validation{
+    margin-top: 5%;
+}
+.main-cont{
+    margin-top:10%;
+}
+.mail
+{
+    font-size: 1.2rem;
+    font-weight: bolder;
+}
+.mailLink{
+    font-weight: bold;
+    color: #64a19d;;
+}
+.message{
+    color:black;
+    font-size: 1.1rem;
+    font-weight: bolder;
+}
+.newmessage
+{
+    color: #64a19d;;
+    font-weight: bolder;
+    font-size: 1.1rem;
+}
+.readmessage{
+    color: black;;
+    font-weight: normal;
+    font-size: 1.1rem;
+}
+hr{
+    height: 10px;
+}
+#mainNav{
+    background: white;
+}
+  @media (max-width: 792px) {
+    .main-cont{
+      margin-top: 20%;
+  }
+  }
+
+.listdesc{
+    overflow: hidden;
+   display: -webkit-box;
+   -webkit-line-clamp: 3; /* number of lines to show */
+           line-clamp: 3; 
+   -webkit-box-orient: vertical;
+}
+
+.clock {
+    font-size: 1.3rem;
+
+  }
+.welcome
+{
+    font-size: 1.7rem;
+}
+.nav-item.active {
+    font-weight: bold;
+    /* Inne style dla aktywnego elementu nawigacji */
+}
+
+
+
+
+
+
+
