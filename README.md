@@ -23,10 +23,12 @@ Hasło: admin
 ## Screenshots:camera:
 
  
-![1](https://github.com/kcreds/AdministartorPanel/blob/main/Screen/1.PNG?raw=true)
+![1](https://github.com/kcreds/newhouse.-laravel-/blob/main/SC/1.jpg?raw=true)
 
-![2](https://github.com/kcreds/AdministartorPanel/blob/main/Screen/2.PNG?raw=true)
+![2](https://github.com/kcreds/newhouse.-laravel-/blob/main/SC/2.jpg?raw=true)
 
-![3](https://github.com/kcreds/AdministartorPanel/blob/main/Screen/3.PNG?raw=true)
+![3](https://github.com/kcreds/newhouse.-laravel-/blob/main/SC/3.JPG?raw=true)
+
+![4](https://github.com/kcreds/newhouse.-laravel-/blob/main/SC/4.jpg?raw=true)
 
  
