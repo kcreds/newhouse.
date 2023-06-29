@@ -12,7 +12,7 @@ Hasło: admin
 * Szablon Bootstrap, który edytowałem pod projekt <a href="https://github.com/StartBootstrap/startbootstrap-grayscale">Link</a>
 
 ## Funkcjonalności
-- możliwość dodawania, edytowania, usuwania ogłoszeń wraz z meta tagami ważnymi dla SEO.
+- możliwość dodawania, edytowania, usuwania ogłoszeń
 - dynamiczne wyszukiwanie ogłoszeń 
 - system wiadomości połączony z panelem administracyjnym
 <br>
