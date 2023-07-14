@@ -7,7 +7,7 @@ Hasło: admin
 ## Technologie
 * Laravel, Livewire
 * PHP, MYSQL
-* JS (<a href="https://lokeshdhakar.com/projects/lightbox2/">lightbox2</a>)
+* JS, (<a href="https://lokeshdhakar.com/projects/lightbox2/">lightbox2</a>)
 * Edytor tekstu <a href="https://www.tiny.cloud/">TinyMCE</a>
 * Szablon Bootstrap, który edytowałem pod projekt <a href="https://github.com/StartBootstrap/startbootstrap-grayscale">Link</a>
 
@@ -15,9 +15,11 @@ Hasło: admin
 - możliwość dodawania, edytowania, usuwania ogłoszeń
 - dynamiczne wyszukiwanie ogłoszeń 
 - system wiadomości połączony z panelem administracyjnym
+- możliwość dodania własnego szablonu do wyświetlania dodanych nieruchomości
 <br>
 <br>
 <p>Zdjęcia w projekcie są tylko przykładem, teksty zostały napisane przez AI.</p>
+<p>Plik do stworzenia własnego szablonu newhouse/CustomTemplateProperty.php</p>
 
 ## Screenshots:camera:
 
