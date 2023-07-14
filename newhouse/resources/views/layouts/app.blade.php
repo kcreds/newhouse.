@@ -6,7 +6,7 @@
     @if (Route::currentRouteName() === 'home')
         <title>newhouse.</title>
     @elseif (Route::currentRouteName() === 'search')
-    <title>newhouse. - szukaj</title>
+        <title>newhouse. - szukaj</title>
     @endif
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="@yield('meta_desc')" />
@@ -26,6 +26,7 @@
         <link rel="stylesheet" href="{{ asset('css/searchview-style.css') }}">
     @elseif(Route::currentRouteName() === 'property')
         <link rel="stylesheet" href="{{ asset('css/property-style.css') }}">
+        <link href="{{ asset('css/lightbox.css') }}" rel="stylesheet" />
     @endif
     @livewireStyles
 </head>
@@ -68,6 +69,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         @if (Route::currentRouteName() === 'property')
+            <script src="{{ asset('js/lightbox.js') }}" crossorigin="anonymous"></script>
             <script src="{{ asset('js/text-cut.js') }}"></script>
         @elseif (Route::currentRouteName() === 'home')
             <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
@@ -75,6 +77,7 @@
             <script src="{{ asset('js/home-anim.js') }}"></script>
             <script src="{{ asset('js/type.js') }}"></script>
         @elseif (Route::currentRouteName() === 'search')
+            <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
             <script src="{{ asset('js/search-anim.js') }}"></script>
         @endif
     </footer>

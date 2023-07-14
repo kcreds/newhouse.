@@ -69,8 +69,7 @@
             </div>
             <div class="form-group">
                 <label for="main_photo">Głowne Zdjęcie</label>
-                <input type="file" class="form-control" id="main_photo" name="main_photo"
-                    value="{{ old('main_photo') }}">
+                <input type="file" class="form-control" id="main_photo" name="main_photo">
             </div>
             <div class="form-group">
                 <label for="long_desc">Długi Opis</label>
@@ -88,8 +87,7 @@
             </div>
             <div class="form-group">
                 <label for="first_photo">Pierwsze Zdjęcie</label>
-                <input type="file" class="form-control" id="first_photo" name="first_photo"
-                    value="{{ old('first_photo') }}">
+                <input type="file" class="form-control" id="first_photo" name="first_photo">
             </div>
             <div class="form-group">
                 <label for="second_head">Drugi Nagłowek</label>
@@ -103,11 +101,14 @@
             </div>
             <div class="form-group">
                 <label for="second_photo">Drugie Zdjęcie</label>
-                <input type="file" class="form-control" id="second_photo" name="second_photo"
-                    value="{{ old('second_photo') }}">
+                <input type="file" class="form-control" id="second_photo" name="second_photo">
+            </div>
+            <div class="form-group">
+                <label for="photo_gallery">Galeria Zdjęć</label>
+                <input type="file" class="form-control" id="photo_gallery" name="photo_gallery[]" multiple>
             </div>
             <hr>
-            <button type="submit" class="btn btn-primary ">Zapisz</button>
+            <input type="submit" class="btn btn-primary " value="Zapisz" />
         </form>
     </div>
 @endsection

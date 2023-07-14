@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\immovablesTemplate;
 use Illuminate\Http\Request;
 use App\Models\Immovables;
 use App\Models\Tidings;
+use View;
 
 class SiteController extends Controller
 {
@@ -23,13 +25,16 @@ class SiteController extends Controller
 
     public function property($slug)
     {
-        $immovables = Immovables::find($slug);
-        $immovables = Immovables::where('slug', $slug)->firstOrFail();
-        return view('property', ['immovable' => $immovables]);
+        $immovable = Immovables::where('slug', $slug)->firstOrFail();
 
-        if (!$immovables) {
+        if (!$immovable) {
             abort(404);
         }
+
+        if (View::exists('templates.custom_template')) {
+            return view('templates.custom_template', ['immovable' => $immovable]);
+        }else
+            return view('property', ['immovable' => $immovable]);
     }
     public function login()
     {

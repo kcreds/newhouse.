@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('second_head')->nullable();
             $table->text('second_desc')->nullable();
             $table->string('second_photo')->nullable();
+            $table->json('photo_gallery')->nullable();
             $table->timestamps();
         });
     }

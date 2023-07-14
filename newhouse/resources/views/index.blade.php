@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <!-- Masthead-->
     <header class="masthead">
         <div id="startchange" class="container maintext px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">

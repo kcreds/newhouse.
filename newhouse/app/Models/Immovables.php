@@ -12,6 +12,7 @@ use Illuminate\Validation\Rule;
 class Immovables extends Model
 {
     use HasFactory;
+    
 
     protected $fillable = [
         'name',
@@ -28,7 +29,13 @@ class Immovables extends Model
         'first_desc' ,
         'second_head' ,
         'second_desc' ,
+        'photo_gallery',
     ];
+
+    public function getPhotoGalleryAttribute($value)
+    {
+        return json_decode($value, true);
+    }
 
     public function validateData(array $data)
     {
@@ -60,6 +67,7 @@ class Immovables extends Model
             'second_head' => '',
             'second_desc' => '',
             'second_photo' => 'image',
+            'photo_gallery.*' => 'image',
         ];
     }
 }
