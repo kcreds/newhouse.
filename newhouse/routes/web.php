@@ -26,14 +26,17 @@ Route::get('/admin/logout',[AuthController::class,'logout_admin'])->name('logout
 
 
 Route::group(['middleware' => 'admin'], function(){
+
     Route::get('/admin/dashboard',[AuthController::class,'dashboard'])->name('dashboard');
+
     Route::get('/admin/nieruchomosci',[AdminController::class,'list'])->name('immovables_list');
     Route::get('/admin/nieruchomosci/dodaj',[AdminController::class,'add'])->name('immovables_add');
     Route::post('/admin/nieruchomosci/zapisz',[AdminController::class,'insert'])->name('immovables_insert');
     Route::get('/admin/nieruchomosci/edytuj/{id}',[AdminController::class,'edit'])->name('immovables_edit');
     Route::post('/admin/nieruchomosci/zmien/{id}',[AdminController::class,'update'])->name('immovables_update');
     Route::get('/admin/nieruchomosci/usun/{id}',[AdminController::class,'delete'])->name('immovables_delete');
-    Route::post('/immovables/{id}/photos/{photo}',[AdminController::class,'deletePhoto'])->name('immovables_deletePhoto');
+    Route::post('/nieruchomosci/{id}/photos/{photo}',[AdminController::class,'deletePhoto'])->name('immovables_deletePhoto');
+
     Route::post('template.update',[TemplateController::class,'updateTemplate'])->name('immovables_updateTemplate');
     Route::get('template.delete',[TemplateController::class,'deleteTemplate'])->name('immovables_deleteTemplate');
 });

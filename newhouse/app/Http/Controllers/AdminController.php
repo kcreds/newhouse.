@@ -13,10 +13,19 @@ use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
-    public function list()
+    public function list(Request $request)
     {
-        $template = immovablesTemplate::first();
-        $immovables = Immovables::paginate(10);
+        $template = ImmovablesTemplate::first();
+        $query = Immovables::query();
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('name', 'like', "%$search%");
+        }
+
+        $perPage = $request->input('per_page', 10);
+        $immovables = $query->paginate($perPage);
+
         return view('immovables-list', ['immovables' => $immovables, 'template' => $template]);
     }
     public function add()
@@ -36,41 +45,41 @@ class AdminController extends Controller
         $validatedData = $immovables->validateData($data);
         if ($validatedData) {
             $immovables->fill($validatedData);
-            $immovables->name =  $validatedData['name'];
-            $immovables->meta_name =  $validatedData['meta_name'];
-            $immovables->meta_desc =  $validatedData['meta_desc'];
-            $immovables->metarobots =  $validatedData['metarobots'];
+            $immovables->name = $validatedData['name'];
+            $immovables->meta_name = $validatedData['meta_name'];
+            $immovables->meta_desc = $validatedData['meta_desc'];
+            $immovables->metarobots = $validatedData['metarobots'];
             $immovables->slug = Str::slug($validatedData['slug']);
-            $immovables->price =  $validatedData['price'];
-            $immovables->extent =  $validatedData['extent'];
-            $immovables->address =  $validatedData['address'];
-            $immovables->short_desc =  $validatedData['short_desc'];
+            $immovables->price = $validatedData['price'];
+            $immovables->extent = $validatedData['extent'];
+            $immovables->address = $validatedData['address'];
+            $immovables->short_desc = $validatedData['short_desc'];
             if ($request->hasfile('main_photo')) {
                 $file = $request->file('main_photo');
                 $file_extension = $file->getClientOriginalName();
                 $destination_path = public_path() . '/folder/images/';
-                $filename =  time() . '-' . $file_extension;
+                $filename = time() . '-' . $file_extension;
                 $request->file('main_photo')->move($destination_path, $filename);
                 $immovables->main_photo = $filename;
             }
-            $immovables->long_desc =  $validatedData['long_desc'];
-            $immovables->first_head =  $validatedData['first_head'];
-            $immovables->first_desc =  $validatedData['first_desc'];
+            $immovables->long_desc = $validatedData['long_desc'];
+            $immovables->first_head = $validatedData['first_head'];
+            $immovables->first_desc = $validatedData['first_desc'];
             if ($request->hasfile('first_photo')) {
                 $file = $request->file('first_photo');
                 $file_extension = $file->getClientOriginalName();
                 $destination_path = public_path() . '/folder/images/';
-                $filename =  time() . '-' . $file_extension;
+                $filename = time() . '-' . $file_extension;
                 $request->file('first_photo')->move($destination_path, $filename);
                 $immovables->first_photo = $filename;
             }
-            $immovables->second_head =  $validatedData['second_head'];
-            $immovables->second_desc =  $validatedData['name'];
+            $immovables->second_head = $validatedData['second_head'];
+            $immovables->second_desc = $validatedData['name'];
             if ($request->hasfile('second_photo')) {
                 $file = $request->file('second_photo');
                 $file_extension = $file->getClientOriginalName();
                 $destination_path = public_path() . '/folder/images/';
-                $filename =  time() . '-' . $file_extension;
+                $filename = time() . '-' . $file_extension;
                 $request->file('second_photo')->move($destination_path, $filename);
                 $immovables->second_photo = $filename;
             }
@@ -82,7 +91,7 @@ class AdminController extends Controller
                 foreach ($photoGallery as $photo) {
                     $file_extension = $photo->getClientOriginalName();
                     $destination_path = public_path() . '/folder/images/';
-                    $filename =  time() . '-' . $file_extension;
+                    $filename = time() . '-' . $file_extension;
                     $photo->move($destination_path, $filename);
 
                     $galleryFilenames[] = $filename;
@@ -105,15 +114,15 @@ class AdminController extends Controller
         $validatedData = $request->validate($immovables->validationRules($immovables));
 
         if ($validatedData) {
-            $immovables->name =  $validatedData['name'];
-            $immovables->meta_name =  $validatedData['meta_name'];
-            $immovables->meta_desc =  $validatedData['meta_desc'];
-            $immovables->metarobots =  $validatedData['metarobots'];
+            $immovables->name = $validatedData['name'];
+            $immovables->meta_name = $validatedData['meta_name'];
+            $immovables->meta_desc = $validatedData['meta_desc'];
+            $immovables->metarobots = $validatedData['metarobots'];
             $immovables->slug = Str::slug($validatedData['slug']);
-            $immovables->price =  $validatedData['price'];
-            $immovables->extent =  $validatedData['extent'];
-            $immovables->address =  $validatedData['address'];
-            $immovables->short_desc =  $validatedData['short_desc'];
+            $immovables->price = $validatedData['price'];
+            $immovables->extent = $validatedData['extent'];
+            $immovables->address = $validatedData['address'];
+            $immovables->short_desc = $validatedData['short_desc'];
             if ($request->hasfile('main_photo')) {
                 $destination = public_path() . '/folder/images/' . $immovables->main_photo;
                 if (File::exists($destination)) {
@@ -122,7 +131,7 @@ class AdminController extends Controller
                 $file = $request->file('main_photo');
                 $file_extension = $file->getClientOriginalName();
                 $destination_path = public_path() . '/folder/images/';
-                $filename =  time() . '-' . $file_extension;
+                $filename = time() . '-' . $file_extension;
                 $request->file('main_photo')->move($destination_path, $filename);
                 $immovables->main_photo = $filename;
             }
@@ -137,7 +146,7 @@ class AdminController extends Controller
                 $file = $request->file('first_photo');
                 $file_extension = $file->getClientOriginalName();
                 $destination_path = public_path() . '/folder/images/';
-                $filename =  time() . '-' . $file_extension;
+                $filename = time() . '-' . $file_extension;
                 $request->file('first_photo')->move($destination_path, $filename);
                 $immovables->first_photo = $filename;
             }
@@ -151,7 +160,7 @@ class AdminController extends Controller
                 $file = $request->file('second_photo');
                 $file_extension = $file->getClientOriginalName();
                 $destination_path = public_path() . '/folder/images/';
-                $filename =  time() . '-' . $file_extension;
+                $filename = time() . '-' . $file_extension;
                 $request->file('second_photo')->move($destination_path, $filename);
                 $immovables->second_photo = $filename;
             }
@@ -159,26 +168,30 @@ class AdminController extends Controller
             if ($request->hasFile('photo_gallery')) {
                 $destination_path = public_path('folder/images/');
                 $galleryFilenames = [];
-
-                if ($immovables->photo_gallery) {
-                    $photoGallery = $immovables->photo_gallery;
-                    foreach ($photoGallery as $photo) {
-                        $destination = $destination_path . $photo;
-                        if (File::exists($destination)) {
-                            File::delete($destination);
-                        }
-                    }
-                }
-
+            
+                // Pobierz istniejące zdjęcia z bazy danych (jeśli istnieją)
+                $existingGallery = $immovables->photo_gallery ?? [];
+            
                 foreach ($request->file('photo_gallery') as $photo) {
                     $file_extension = $photo->getClientOriginalName();
                     $filename = time() . '-' . $file_extension;
                     $photo->move($destination_path, $filename);
-
+            
                     $galleryFilenames[] = $filename;
                 }
-
-                $immovables->photo_gallery = json_encode($galleryFilenames);
+            
+                // Dodaj nowe zdjęcia do istniejącego zbioru
+                $galleryFilenames = array_merge($existingGallery, $galleryFilenames);
+            
+                $immovables->photo_gallery = $galleryFilenames;
+            
+                // Usuń stare zdjęcia, które nie zostały dodane ponownie
+                foreach ($existingGallery as $photo) {
+                    $destination = $destination_path . $photo;
+                    if (!in_array($photo, $galleryFilenames) && File::exists($destination)) {
+                        File::delete($destination);
+                    }
+                }
             }
 
 

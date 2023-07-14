@@ -18,7 +18,7 @@
         @endif
         <div class="row">
             <div class="col">
-                <div class="col-sm-12">
+                <div class="col-sm-12 mt-3">
                     <form action="{{ route('immovables_updateTemplate') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <label for="selectedFile" class="h5">Aktualny szablon: </label>
@@ -41,13 +41,37 @@
                     </form>
                 </div>
             </div>
+
             <div class="col">
-                <div class="col-sm-12 mt-5  addbtn">
-                    <a href="{{ url('/admin/nieruchomosci/dodaj') }}" class="btn btn-primary">Dodaj</a>
+                <div class="col-sm-12 mt-5 addbtn">
+                    <a href="{{ url('/admin/nieruchomosci/dodaj') }}" class="btn btn-primary">Dodaj nowe ogłoszenie</a>
                 </div>
             </div>
         </div>
-
+        <hr>
+        <div class="row mt-5 fs-6">
+            <div class="col-sm-12 mt-3 d-flex w-50">
+                <form action="{{ route('immovables_list') }}" method="GET">
+                    <div class="input-group mb-3">
+                        <select name="per_page" class="form-select">
+                            <option value="10" @if ($immovables->perPage() == 10) selected @endif>10</option>
+                            <option value="25" @if ($immovables->perPage() == 25) selected @endif>25</option>
+                            <option value="50" @if ($immovables->perPage() == 50) selected @endif>50</option>
+                            <option value="100" @if ($immovables->perPage() == 100) selected @endif>100</option>
+                        </select>
+                        <button class="btn btn-primary" type="submit">Wyświetl</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-12 mt-3 addbtn w-50">
+                <form action="{{ route('immovables_list') }}" method="GET">
+                    <div class="input-group mb-3">
+                        <input type="text" name="search" class="form-control" placeholder="Szukaj...">
+                        <button class="btn btn-primary" type="submit">Szukaj</button>
+                    </div>
+                </form>
+            </div>
+        </div>
         <table class="table table-hover table-striped">
             <thead>
                 <tr>
@@ -58,23 +82,30 @@
                 </tr>
             </thead>
             <tbody>
-                @php $count = 0; @endphp
-                @foreach ($immovables as $item)
-                    @php $count++; @endphp
+                @if ($immovables->isEmpty())
                     <tr>
-                        <th scope="row">{{ $count }}</th>
-                        <td>{{ $item->name }}</td>
-                        <td class="text-break">{!! $item->short_desc !!}</td>
-                        <td><a href="{{ route('immovables_edit', ['id' => $item->id]) }}"
-                                class="btn btn-primary me-1 mt-1">Edytuj
-                                <a href="{{ route('immovables_delete', ['id' => $item->id]) }}" class="btn btn-danger mt-1"
-                                    onclick="return confirm('Czy na pewno chcesz usunąć?')">Usuń</a>
-
+                        <td class="h3 text-center" colspan="4">Brak wyników</td>
                     </tr>
-                @endforeach
+                @else
+                    @php $count = 0; @endphp
+                    @foreach ($immovables as $item)
+                        @php $count++; @endphp
+                        <tr>
+                            <th scope="row">{{ $count }}</th>
+                            <td>{{ $item->name }}</td>
+                            <td class="text-break">{!! $item->short_desc !!}</td>
+                            <td><a href="{{ route('immovables_edit', ['id' => $item->id]) }}"
+                                    class="btn btn-primary me-1 mt-1">Edytuj
+                                    <a href="{{ route('immovables_delete', ['id' => $item->id]) }}"
+                                        class="btn btn-danger mt-1"
+                                        onclick="return confirm('Czy na pewno chcesz usunąć?')">Usuń</a>
+
+                        </tr>
+                    @endforeach
+                @endif
             </tbody>
         </table>
-        {{ $immovables->links('pagination::bootstrap-5') }}
+        {{ $immovables->appends(request()->except('page'))->links('pagination::bootstrap-5') }}
     </div>
     <script>
         function handleFileChange(event) {

@@ -149,7 +149,8 @@
                                 <img class="img-fluid mb-3 mt-2 mb-lg-0" src="{{ asset('/folder/images/' . $photo) }}"
                                     width="100" height="100">
                             </a>
-                            <button class="delete-button ms-1 mt-1 btn btn-danger" type="button" data-photo="{{ $photo }}"
+                            <button class="delete-button ms-1 mt-1 btn btn-danger"
+                                type="button" data-photo="{{ $photo }}"
                                 data-index="{{ $index }}">Usuń</button>
                         </div>
                     @endforeach
@@ -163,22 +164,25 @@
         </form>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var deleteButtons = document.querySelectorAll('.delete-button');
-
-            deleteButtons.forEach(function(button) {
-                button.addEventListener('click', function() {
+        var deleteButtons = document.querySelectorAll('.delete-button');
+    
+        deleteButtons.forEach(function(button) {
+            button.addEventListener('click', function(event) {
+                var confirmResult = confirm('Czy na pewno chcesz usunąć?');
+                if (!confirmResult) {
+                    event.stopPropagation(); // Przerwij propagację zdarzenia
+                } else {
                     var photo = button.dataset.photo;
                     var index = button.dataset.index;
                     var immovableId = {{ $immovable->id }};
-
+    
                     removePhoto(photo, index, immovableId);
-                });
+                }
             });
         });
-
+    
         function removePhoto(photo, index, immovableId) {
-            fetch(`/immovables/${immovableId}/photos/${photo}`, {
+            fetch(`/nieruchomosci/${immovableId}/photos/${photo}`, {
                     method: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
@@ -187,14 +191,12 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-
                         var imageContainer = document.getElementById('photo_' + index);
                         if (imageContainer) {
                             imageContainer.parentNode.removeChild(imageContainer);
                         }
-
                     } else {
-
+                        // Obsłuż błąd
                     }
                 })
                 .catch(error => {
