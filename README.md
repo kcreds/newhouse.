@@ -12,8 +12,7 @@
 - możliwość dodawania, edytowania, usuwania ogłoszeń
 - dynamiczne wyszukiwanie ogłoszeń 
 - system wiadomości połączony z panelem administracyjnym
-- możliwość dodania własnego szablonu do wyświetlania dodanych nieruchomości
-<br>
+- możliwość dodania własnego szablonu do wyświetlania ogłoszeń nieruchomości
 <br>
 <p>Zdjęcia w projekcie są tylko przykładem, teksty zostały napisane przez AI.</p>
 <p>Plik do stworzenia własnego szablonu newhouse/CustomTemplateProperty.php</p>
